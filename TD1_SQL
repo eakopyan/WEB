@@ -1,0 +1,36 @@
+// Initialisation :
+./sqlite3
+sqlite> .read chinook.sql
+sqlite> .tables
+
+// Question 1 : Pour tous les employés, donnez le nom complet, l'adresse, la ville et le pays.
+SELECT LastName, FirstName, Address, City, Country 
+FROM Employee;
+
+// Question 2 : Donnez la liste de toutes les personnes (employés et clients) qui habitent dans une ville dont le
+nom commence par un L.
+sqlite> SELECT LastName, FirstName, City
+   ...> FROM Employee
+   ...> WHERE City LIKE 'L%'
+   ...> UNION
+   ...> SELECT LastName, FirstName, City
+   ...> FROM Customer
+   ...> WHERE City LIKE 'L%';
+
+// Question 3 : Donnez les noms des artistes avec les titres des albums qu'ils ont sortis, gardez-en les 25
+premiers résultats ordonnés par le nom d'artiste.
+sqlite> SELECT Name, Title
+   ...> FROM Artist LEFT JOIN Album
+   ...> WHERE Artist.ArtistId = Album.ArtistId
+   ...> ORDER BY Name
+   ...> LIMIT 25;
+
+// Question 4 : Donnez les noms des pistes de l'album de Metallica qui s'intitule « Master of Puppets ».
+sqlite> SELECT Name
+   ...> FROM Album JOIN Track
+   ...> WHERE Album.AlbumId = Track.AlbumId AND
+   ...> Album.Title = 'Master Of Puppets';
+
+// Question 5 : Donnez la liste de tous les employés avec les clients dont ils se sont occupés, y compris les
+employés qui ne se sont pas occupés de clients.
+--> Regarder les conditions de jointure dans le cas d'un LEFT/RIGHT JOIN
