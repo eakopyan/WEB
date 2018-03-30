@@ -1,0 +1,6 @@
+Hello!
+This is the first time I see you here.
+
+How's life?
+
+Life's good, thanks. I am currently in the static folder. 
